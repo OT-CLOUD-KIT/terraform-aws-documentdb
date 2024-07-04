@@ -1,6 +1,9 @@
-# terraform-aws-documentdb
-
 # Terraform AWS DocumentDB Cluster Module
+[![Opstree Solutions][opstree_avatar]][opstree_homepage]<br/>[Opstree Solutions][opstree_homepage] 
+
+  [opstree_homepage]: https://opstree.github.io/
+  [opstree_avatar]: https://img.cloudposse.com/150x150/https://github.com/opstree.png
+
 
 This Terraform module manages an Amazon DocumentDB (with MongoDB compatibility) cluster on AWS. It provisions the cluster, its instances, associated security groups, subnet groups, and parameter groups.
 
@@ -123,3 +126,11 @@ module "aws_documentdb_cluster" {
 | deletion_protection             | Whether to enable deletion protection for the cluster              | bool   | false   | no       |
 | tags                            | Tags to apply to all resources                                    | map    | {}      | no       |
 
+
+## Related Projects
+- [RDS](https://gitlab.com/ot-aws/terrafrom_v0.12.21/rds) - Terraform module for creating Relation Datbase service.
+- [DynamoDB](https://github.com/OT-CLOUD-KIT/terraform-aws-dynamodb) - Terraform module for creating DynamoDB.
+
+## Contributors
+- [Ankit](https://www.linkedin.com/in/ankit-mishra-aab383210/) 
+- [Rajat Vats](https://www.linkedin.com/in/rajat-vats-32042aa9/)
