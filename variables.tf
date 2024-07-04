@@ -1,9 +1,3 @@
-# variable "zone_id" {
-#   type        = list(string)
-#   default     = ""
-#   description = "Route53 parent zone ID. If provided (not empty), the module will create sub-domain DNS records for the DocumentDB master and replicas"
-# }
-
 variable "egress_from_port" {
   type        = number
   default     = 0
@@ -46,6 +40,11 @@ variable "allowed_cidr_blocks" {
   description = "List of CIDR blocks to be allowed to connect to the DocumentDB cluster"
 }
 
+variable "vpc_cidr_block" {
+  type        = list(string)
+  description = "VPC CIDR block"
+}
+
 variable "external_security_group_id_list" {
   type        = list(string)
   default     = []
@@ -55,6 +54,11 @@ variable "external_security_group_id_list" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID to create the cluster in (e.g. `vpc-a22222ee`)"
+}
+
+variable "vpc_security_group_ids" {
+  type    = set(string)
+  default = null
 }
 
 variable "subnet_ids" {

@@ -9,7 +9,7 @@ variable "availability_zones" {
 }
 
 variable "vpc_cidr_block" {
-  type        = string
+  type        = list(string)
   description = "VPC CIDR block"
 }
 

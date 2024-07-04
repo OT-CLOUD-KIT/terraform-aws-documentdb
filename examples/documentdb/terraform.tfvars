@@ -8,7 +8,7 @@ stage = "test"
 
 name = "documentdb-cluster"
 
-vpc_cidr_block = "172.31.0.0/16"
+vpc_cidr_block = ["172.31.0.0/16"]
 
 subnet_ids = ["subnet-0f115d0114796ab49", "subnet-055d2f5bac51ee0f6"]
 

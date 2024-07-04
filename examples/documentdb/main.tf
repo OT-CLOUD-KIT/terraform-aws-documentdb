@@ -2,6 +2,32 @@ provider "aws" {
   region = var.region
 }
 
+module "documnetdb_security_group" {
+  source                             = "OT-CLOUD-KIT/security-groups/aws"
+  version                            = "1.0.0"
+  enable_whitelist_ip                = false
+  enable_source_security_group_entry = true
+
+  name_sg = format("%s-documentdb-security-group", "${var.cluster_identifier}")
+  vpc_id  = var.vpc_id
+  tags    = var.tags
+    ingress_rule = {
+    rules = {
+      rule_list = [
+        {
+          description  = "DocumentDB SG"
+          from_port    = var.db_port
+          to_port      = var.db_port
+          protocol     = "tcp"
+          cidr         = []
+          source_SG_ID = []
+        }
+      ]
+    }
+  }  
+}
+
+
 
 module "aws_documentdb_cluster" {
   source                          = "../../"
@@ -13,12 +39,12 @@ module "aws_documentdb_cluster" {
   vpc_id                          = var.vpc_id
   subnet_ids                      = var.subnet_ids
   apply_immediately               = var.apply_immediately
-  allowed_cidr_blocks             = var.allowed_cidr_blocks
+  vpc_cidr_block                 = var.vpc_cidr_block
   snapshot_identifier             = var.snapshot_identifier
   cluster_identifier              = var.cluster_identifier
   retention_period                = var.retention_period
   auto_minor_version_upgrade      = var.auto_minor_version_upgrade
-  allowed_security_groups         = var.allowed_security_groups
+  vpc_security_group_ids          = [module.documnetdb_security_group.sg_id]
   preferred_backup_window         = var.preferred_backup_window
   preferred_maintenance_window    = var.preferred_maintenance_window
   cluster_parameters              = var.cluster_parameters
