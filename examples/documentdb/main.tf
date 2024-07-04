@@ -15,8 +15,8 @@ module "documnetdb_security_group" {
           from_port    = var.db_port
           to_port      = var.db_port
           protocol     = "tcp"
-          cidr         = []
-          source_SG_ID = []
+          cidr         = ["var.vpc_cidr_block"]
+          source_SG_ID = [module.documnetdb_security_group.sg_id]
         }
       ]
     }
