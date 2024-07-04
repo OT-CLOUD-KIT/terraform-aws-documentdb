@@ -13,13 +13,6 @@ variable "vpc_cidr_block" {
   description = "VPC CIDR block"
 }
 
-
-# variable "zone_id" {
-#   type        = list(string)
-#   default     = ""
-#   description = "Route53 parent zone ID. If provided (not empty), the module will create sub-domain DNS records for the DocumentDB master and replicas"
-# }
-
 variable "allowed_security_groups" {
   type        = list(string)
   default     = []
@@ -194,4 +187,10 @@ variable "enabled" {
   type        = bool
   default     = true
   description = "Flag to control the documentDB creation."
+}
+
+variable "deletion_protection" {
+  type        = bool
+  description = "A value that indicates whether the DB cluster has deletion protection enabled"
+  default     = false
 }

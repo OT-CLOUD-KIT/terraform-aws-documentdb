@@ -43,5 +43,7 @@ ssm_parameter_enabled = true
 
 cluster_identifier = "opstree"
 
+deletion_protection= false
+
 
 

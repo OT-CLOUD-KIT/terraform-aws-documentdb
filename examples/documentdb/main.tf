@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
 module "documnetdb_security_group" {
   source                             = "OT-CLOUD-KIT/security-groups/aws"
   version                            = "1.0.0"
@@ -31,29 +27,42 @@ module "documnetdb_security_group" {
 
 module "aws_documentdb_cluster" {
   source                          = "../../"
+  
+  # Basic Configuration
   cluster_identifier              = var.cluster_identifier
   cluster_size                    = var.cluster_size
-  master_username                 = var.master_username
-  master_password                 = var.master_password
   instance_class                  = var.instance_class
   db_port                         = var.db_port
+  engine                          = var.engine
+  engine_version                  = var.engine_version
+
+  # Authentication
+  master_username                 = var.master_username
+  master_password                 = var.master_password
+
+  # Network Configuration
   vpc_id                          = var.vpc_id
   subnet_ids                      = var.subnet_ids
-  apply_immediately               = var.apply_immediately
   vpc_cidr_block                  = var.vpc_cidr_block
+  vpc_security_group_ids          = [module.documnetdb_security_group.sg_id]
+
+  # Maintenance and Backup
+  apply_immediately               = var.apply_immediately
   snapshot_identifier             = var.snapshot_identifier
   retention_period                = var.retention_period
   auto_minor_version_upgrade      = var.auto_minor_version_upgrade
-  vpc_security_group_ids          = [module.documnetdb_security_group.sg_id]
   preferred_backup_window         = var.preferred_backup_window
   preferred_maintenance_window    = var.preferred_maintenance_window
+
+  # Additional Configuration
   cluster_parameters              = var.cluster_parameters
   cluster_family                  = var.cluster_family
-  engine                          = var.engine
-  engine_version                  = var.engine_version
   storage_encrypted               = var.storage_encrypted
   kms_key_id                      = var.kms_key_id
   skip_final_snapshot             = var.skip_final_snapshot
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
   ssm_parameter_enabled           = var.ssm_parameter_enabled
+  deletion_protection             = var.deletion_protection
+  tags                            = var.tags
 }
+
