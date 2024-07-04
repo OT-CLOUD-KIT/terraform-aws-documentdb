@@ -31,6 +31,7 @@ module "documnetdb_security_group" {
 
 module "aws_documentdb_cluster" {
   source                          = "../../"
+  cluster_identifier              = var.cluster_identifier
   cluster_size                    = var.cluster_size
   master_username                 = var.master_username
   master_password                 = var.master_password
@@ -39,9 +40,8 @@ module "aws_documentdb_cluster" {
   vpc_id                          = var.vpc_id
   subnet_ids                      = var.subnet_ids
   apply_immediately               = var.apply_immediately
-  vpc_cidr_block                 = var.vpc_cidr_block
+  vpc_cidr_block                  = var.vpc_cidr_block
   snapshot_identifier             = var.snapshot_identifier
-  cluster_identifier              = var.cluster_identifier
   retention_period                = var.retention_period
   auto_minor_version_upgrade      = var.auto_minor_version_upgrade
   vpc_security_group_ids          = [module.documnetdb_security_group.sg_id]
