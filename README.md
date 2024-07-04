@@ -14,8 +14,7 @@ This Terraform module manages an Amazon DocumentDB (with MongoDB compatibility) 
 - [Usage](#usage)
 - [Inputs](#inputs)
 - [Outputs](#outputs)
-- [Examples](#examples)
-- [Requirements](#requirements)
+
 
 
 ## Introduction
@@ -125,6 +124,16 @@ module "aws_documentdb_cluster" {
 | ssm_parameter_enabled           | Whether to store credentials in SSM Parameter Store               | bool   | false   | no       |
 | deletion_protection             | Whether to enable deletion protection for the cluster              | bool   | false   | no       |
 | tags                            | Tags to apply to all resources                                    | map    | {}      | no       |
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_master_username"></a> master\_username | DocumentDB Username for the master DB user. |
+| <a name="output_cluster_name"></a> cluster\_name | DocumentDB Cluster Identifier. |
+| <a name="output_arn"></a> arn | Amazon Resource Name (ARN) of the DocumentDB cluster. |
+| <a name="output_security_group_id"></a> security\_group\_id | ID of the security group associated with the DocumentDB cluster. |
 
 
 ## Related Projects
