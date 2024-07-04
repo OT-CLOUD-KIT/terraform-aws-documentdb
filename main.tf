@@ -1,4 +1,4 @@
-resource "aws_docdb_cluster" "default" {
+resource "aws_docdb_cluster" "docdb" {
   count                           = var.enabled? 1 : 0
   cluster_identifier              = var.cluster_identifier
   master_username                 = var.master_username
@@ -16,8 +16,8 @@ resource "aws_docdb_cluster" "default" {
   kms_key_id                      = var.kms_key_id
   port                            = var.db_port
   snapshot_identifier             = var.snapshot_identifier
-  db_subnet_group_name            = join("", aws_docdb_subnet_group.default[*].name)
-  db_cluster_parameter_group_name = join("", aws_docdb_cluster_parameter_group.default[*].name)
+  db_subnet_group_name            = join("", aws_docdb_subnet_group.docdb[*].name)
+  db_cluster_parameter_group_name = join("", aws_docdb_cluster_parameter_group.docdb[*].name)
   engine                          = var.engine
   engine_version                  = var.engine_version
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
@@ -25,10 +25,10 @@ resource "aws_docdb_cluster" "default" {
   tags                            = var.tags
 }
 
-resource "aws_docdb_cluster_instance" "default" {
+resource "aws_docdb_cluster_instance" "docdb" {
   count                        = "1"
   identifier                   = "${var.cluster_identifier}-${count.index + 1}"
-  cluster_identifier           = join("", aws_docdb_cluster.default[*].id)
+  cluster_identifier           = join("", aws_docdb_cluster.docdb[*].id)
   apply_immediately            = var.apply_immediately
   preferred_maintenance_window = var.preferred_maintenance_window
   instance_class               = var.instance_class
@@ -39,15 +39,15 @@ resource "aws_docdb_cluster_instance" "default" {
   tags                         = var.tags
 }
 
-resource "aws_docdb_subnet_group" "default" {
-   count       = var.enabled? 1 : 0
+resource "aws_docdb_subnet_group" "docdb" {
+  count       = var.enabled? 1 : 0
   name        = var.cluster_identifier
   description = "Allowed subnets for DB cluster instances"
   subnet_ids  = var.subnet_ids
   tags        = var.tags
 }
 
-resource "aws_docdb_cluster_parameter_group" "default" {
+resource "aws_docdb_cluster_parameter_group" "docdb" {
   count       = var.enabled? 1 : 0
   name        = var.cluster_identifier
   description = "DB cluster parameter group"

@@ -41,7 +41,7 @@ apply_immediately = true
 
 ssm_parameter_enabled = true
 
-cluster_identifier = "opstree"
+cluster_identifier = "proddocdb"
 
 deletion_protection= false
 
