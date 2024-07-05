@@ -2,12 +2,6 @@ region = "us-east-1"
 
 availability_zones = ["us-east-1a", "us-east-1b"]
 
-namespace = "eg"
-
-stage = "test"
-
-name = "documentdb-cluster"
-
 vpc_cidr_block = ["172.31.0.0/16"]
 
 subnet_ids = ["subnet-0f115d0114796ab49", "subnet-055d2f5bac51ee0f6"]
@@ -33,7 +27,7 @@ engine_version = "5.0.0"
 
 engine = "docdb"
 
-storage_encrypted = true
+# storage_encrypted = false
 
 skip_final_snapshot = true
 

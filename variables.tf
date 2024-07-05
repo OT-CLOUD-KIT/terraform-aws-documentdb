@@ -151,7 +151,7 @@ variable "engine_version" {
 variable "storage_encrypted" {
   type        = bool
   description = "Specifies whether the DB cluster is encrypted"
-  default     = true
+  default     = false
 }
 
 variable "storage_type" {
@@ -168,7 +168,7 @@ variable "storage_type" {
 variable "kms_key_id" {
   type        = string
   description = "The ARN for the KMS encryption key. When specifying `kms_key_id`, `storage_encrypted` needs to be set to `true`"
-  default     = ""
+  default     = null
 }
 
 variable "skip_final_snapshot" {

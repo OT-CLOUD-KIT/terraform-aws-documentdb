@@ -77,6 +77,31 @@ module "aws_documentdb_cluster" {
   tags                            = var.tags
 }
 ```
+
+
+
+
+
+
+## Use Cases:
+
+1- [Basic Setup of Document DB with No Encryption and Keys](https://github.com/OT-CLOUD-KIT/terraform-aws-documentdb/tree/documentDB/examples/simple)
+
+  This example demonstrates a basic setup of AWS DocumentDB using Terraform without encryption and custom KMS keys. It covers essential configurations to get started with DocumentDB in your AWS environment.
+
+2- [Secure Setup of Document DB with Storage Encryption and Custom KMS Key](https://github.com/OT-CLOUD-KIT/terraform-aws-documentdb/tree/documentDB/examples/secured_with_kms_key)
+
+ Explore this example to learn how to securely deploy AWS DocumentDB using Terraform with storage encryption enabled and a custom KMS key. This setup ensures data-at-rest protection using AWS KMS for enhanced security and compliance.
+
+
+
+
+
+
+
+
+
+
 ## Inputs
 
 ### Basic Configuration

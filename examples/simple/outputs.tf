@@ -13,6 +13,6 @@ output "arn" {
   description = "Amazon Resource Name (ARN) of the DocumentDB cluster"
 }
 
-  output "security_group_id" {
-    value = module.documnetdb_security_group.sg_id
-  }
+output "security_group_id" {
+  value = module.documnetdb_security_group.sg_id
+}

@@ -57,8 +57,6 @@ module "aws_documentdb_cluster" {
   # Additional Configuration
   cluster_parameters              = var.cluster_parameters
   cluster_family                  = var.cluster_family
-  storage_encrypted               = var.storage_encrypted
-  kms_key_id                      = var.kms_key_id
   skip_final_snapshot             = var.skip_final_snapshot
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
   ssm_parameter_enabled           = var.ssm_parameter_enabled

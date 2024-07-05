@@ -107,17 +107,12 @@ variable "engine_version" {
   description = "The version number of the database engine to use"
 }
 
-variable "storage_encrypted" {
-  type        = bool
-  description = "Specifies whether the DB cluster is encrypted"
-  default     = true
-}
+# variable "storage_encrypted" {
+#   type        = bool
+#   description = "Specifies whether the DB cluster is encrypted"
+#   default     = false
+# }
 
-variable "kms_key_id" {
-  type        = string
-  description = "The ARN for the KMS encryption key. When specifying `kms_key_id`, `storage_encrypted` needs to be set to `true`"
-  default     = ""
-}
 
 variable "skip_final_snapshot" {
   type        = bool

@@ -2,12 +2,6 @@ region = "us-east-1"
 
 availability_zones = ["us-east-1a", "us-east-1b"]
 
-namespace = "eg"
-
-stage = "test"
-
-name = "documentdb-cluster"
-
 vpc_cidr_block = ["172.31.0.0/16"]
 
 subnet_ids = ["subnet-0f115d0114796ab49", "subnet-055d2f5bac51ee0f6"]
@@ -45,7 +39,7 @@ cluster_identifier = "proddocdb"
 
 deletion_protection= false
 
-alias_name              = "documentdb"
+alias_name              = "documentdb-kms-key"
 deletion_window_in_days = 10
 is_enabled              = true
 enable_key_rotation     = true
