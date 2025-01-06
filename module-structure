@@ -1,0 +1,6 @@
+documentdb-module/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── versions.tf
+└── README.md 

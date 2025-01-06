@@ -1,20 +1,30 @@
 output "master_username" {
-  value       = aws_docdb_cluster.docdb_cluster.master_username
-  description = "Username for the master DB user"
-}
-
-output "master_password" {
-  value       = aws_docdb_cluster.docdb_cluster.master_password
-  description = "Password for the master DB user"
+  description = "DocumentDB Username for the master DB user"
+  value       = var.master_username
   sensitive   = true
 }
 
 output "cluster_name" {
-  value       = aws_docdb_cluster.docdb_cluster.cluster_identifier
-  description = "Cluster Identifier"
+  description = "DocumentDB Cluster Identifier"
+  value       = aws_docdb_cluster.default.cluster_identifier
 }
 
 output "arn" {
-  value       = aws_docdb_cluster.docdb_cluster.arn
-  description = "Amazon Resource Name (ARN) of the cluster"
+  description = "Amazon Resource Name (ARN) of the DocumentDB cluster"
+  value       = aws_docdb_cluster.default.arn
 }
+
+output "security_group_id" {
+  description = "ID of the security group associated with the DocumentDB cluster"
+  value       = aws_security_group.docdb.id
+}
+
+output "endpoint" {
+  description = "The DNS address of the DocumentDB instance"
+  value       = aws_docdb_cluster.default.endpoint
+}
+
+output "reader_endpoint" {
+  description = "A read-only endpoint for the DocumentDB cluster"
+  value       = aws_docdb_cluster.default.reader_endpoint
+} 
