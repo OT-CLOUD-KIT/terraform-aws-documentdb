@@ -2,11 +2,11 @@ region = "us-east-1"
 
 availability_zones = ["us-east-1a", "us-east-1b"]
 
-vpc_cidr_block = ["172.31.0.0/16"]
+vpc_cidr_block = ["10.0.0.0/16"]
 
-subnet_ids = ["subnet-0f115d0114796ab49", "subnet-055d2f5bac51ee0f6"]
+subnet_ids = ["subnet-0759f0a3ac70e88c7", "subnet-0d5d2a5274faf7485"]
 
-vpc_id = "vpc-063ebf4d7094d23fd"
+vpc_id = "vpc-03ddd7fd3163cc23a"
 
 instance_class = "db.t3.medium"
 
@@ -27,7 +27,7 @@ engine_version = "5.0.0"
 
 engine = "docdb"
 
-storage_encrypted = true
+# storage_encrypted = false
 
 skip_final_snapshot = true
 
@@ -39,14 +39,28 @@ cluster_identifier = "proddocdb"
 
 deletion_protection= false
 
-alias_name              = "documentdb-kms-key"
+env      = "d"
+bu       = "BP"
+app      = "db"
+program  = "OT"
+resource = "documentDB"
+team     = "devops"
+
+create                  = true
+random_alphanumeric_len = 2
+special                 = false
+upper                   = false
+number                  = true
+gen_no_of_names         = 1
+
+
+enable_kms              = false
+kms_key_id              = null 
+alias_name              = "proddocdb-kms-key"
 deletion_window_in_days = 10
 is_enabled              = true
 enable_key_rotation     = true
-tags = {
-  Environment = "production"
-  Project     = "documentdb"
-}
+
 kms_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -62,5 +76,6 @@ kms_policy = <<EOF
   ]
 }
 EOF
+
 
 

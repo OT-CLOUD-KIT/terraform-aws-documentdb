@@ -110,14 +110,9 @@ variable "engine_version" {
 variable "storage_encrypted" {
   type        = bool
   description = "Specifies whether the DB cluster is encrypted"
-  default     = true
+  default     = false
 }
 
-variable "kms_key_id" {
-  type        = string
-  description = "The ARN for the KMS encryption key. When specifying `kms_key_id`, `storage_encrypted` needs to be set to `true`"
-  default     = ""
-}
 
 variable "skip_final_snapshot" {
   type        = bool
@@ -195,15 +190,121 @@ variable "deletion_protection" {
   default     = false
 }
 
-variable "alias_name" {
-  description = "The name of the key alias"
+
+variable "env" {
   type        = string
+  description = "Environment (d, p, q, s, g)"
+  default     = "p"
+  validation {
+    condition     = contains(["d", "p", "q", "s", "g"], var.env)
+    error_message = "env must be one of: d, p, q, s, g"
+  }
+}
+
+variable "bu" {
+  type        = string
+  description = "Business unit (max 10 characters)"
+  default     = "BP"
+  validation {
+    condition     = length(var.bu) <= 10
+    error_message = "Business unit name must be <= 10 characters"
+  }
+}
+
+variable "app" {
+  type        = string
+  description = "Application name (max 10 characters)"
+  default     = "database"
+  validation {
+    condition     = length(var.app) <= 10
+    error_message = "App name must be <= 10 characters"
+  }
+}
+
+variable "program" {
+  type        = string
+  description = "Program name (e.g., ot-cloud-kit)"
+  default     = "OT"
+}
+
+variable "resource" {
+  type        = string
+  description = "Optional resource name (max 15 characters)"
+  default     = ""
+  validation {
+    condition     = length(var.resource) <= 20
+    error_message = "Resource name must be <= 15 characters"
+  }
+}
+
+variable "team" {
+  type        = string
+  description = "Team owner or contact (e.g., devops@example.com)"
+  default     = "infra"
+}
+
+
+variable "create" {
+  type        = bool
+  description = "Whether to create resources (module-level toggle)"
+  default     = true
+}
+
+variable "random_alphanumeric_len" {
+  type        = number
+  description = "Length of random alphanumeric string to append (1 to 4)"
+  default     = 2
+  validation {
+    condition     = var.random_alphanumeric_len >= 1 && var.random_alphanumeric_len <= 4
+    error_message = "Length must be between 1 and 4"
+  }
+}
+
+variable "special" {
+  type        = bool
+  description = "Include special characters in generated names"
+  default     = false
+}
+
+variable "upper" {
+  type        = bool
+  description = "Include uppercase characters in generated names"
+  default     = false
+}
+
+variable "number" {
+  type        = bool
+  description = "Include numbers in generated names"
+  default     = true
+}
+
+variable "gen_no_of_names" {
+  type        = number
+  description = "How many names to generate using random naming logic"
+  default     = 1
+}
+
+variable "enable_kms" {
+  type = bool
+  default = false
+
+}
+
+variable "kms_key_id" {
+  type =  string
+  default = ""
+}
+
+
+variable "alias_name" {
+  description = "the name of the key alias"
+  type = string
 }
 
 variable "deletion_window_in_days" {
   description = "The duration in days after which the key is deleted after destruction of the resource"
-  type        = string
-  default     = 30
+  type = string
+  default = 30
 }
 
 variable "is_enabled" {
@@ -219,7 +320,7 @@ variable "enable_key_rotation" {
 }
 
 variable "kms_policy" {
-  description = "The policy of the key usage"
+   description = "The policy of the key usage"
   type        = string
   default     = ""
 }

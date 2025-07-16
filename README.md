@@ -1,9 +1,4 @@
 # Terraform AWS DocumentDB Cluster Module
-[![Opstree Solutions][opstree_avatar]][opstree_homepage]<br/>[Opstree Solutions][opstree_homepage] 
-
-  [opstree_homepage]: https://opstree.github.io/
-  [opstree_avatar]: https://img.cloudposse.com/150x150/https://github.com/opstree.png
-
 
 This Terraform module manages an Amazon DocumentDB (with MongoDB compatibility) cluster on AWS. It provisions the cluster, its instances, associated security groups, subnet groups, and parameter groups.
 
@@ -16,11 +11,13 @@ This Terraform module manages an Amazon DocumentDB (with MongoDB compatibility) 
 - [Inputs](#inputs)
 - [Outputs](#outputs)
 
-
+___
 
 ## Introduction
 
 Amazon DocumentDB is a fully managed document database service that supports MongoDB workloads. This module provides an easy way to deploy and manage DocumentDB clusters using Terraform.
+
+
 
 ## Features
 
@@ -29,6 +26,9 @@ Amazon DocumentDB is a fully managed document database service that supports Mon
 - Configures security groups to control access to the cluster.
 - Supports encryption at rest using AWS KMS.
 - Allows customization of backup and maintenance windows.
+
+![alt text](image.png)
+
 
 ## Usage
 
@@ -97,12 +97,6 @@ module "aws_documentdb_cluster" {
 
 
 
-
-
-
-
-
-
 ## Inputs
 
 ### Basic Configuration
@@ -162,10 +156,4 @@ module "aws_documentdb_cluster" {
 | <a name="output_security_group_id"></a> security\_group\_id | ID of the security group associated with the DocumentDB cluster. |
 
 
-## Related Projects
-- [RDS](https://gitlab.com/ot-aws/terrafrom_v0.12.21/rds) - Terraform module for creating Relation Datbase service.
-- [DynamoDB](https://github.com/OT-CLOUD-KIT/terraform-aws-dynamodb) - Terraform module for creating DynamoDB.
 
-## Contributors
-- [Ankit](https://www.linkedin.com/in/ankit-mishra-aab383210/) 
-- [Rajat Vats](https://www.linkedin.com/in/rajat-vats-32042aa9/)

@@ -252,3 +252,91 @@ variable "enabled" {
   description = "Flag to control the documentDB creation."
 }
 
+
+# Naming Convention
+variable "bu" {
+  description = "Business unit name (e.g., BP, GURUKU). Max 6 characters."
+  type        = string
+  default     = "BP"
+
+  validation {
+    condition     = length(var.bu) <= 10
+    error_message = "The business unit name must be less than or equal to 6 characters."
+  }
+}
+
+variable "program" {
+  description = "Name of the program (e.g., OT, BP)."
+  type        = string
+  default     = "OT"
+}
+
+variable "app" {
+  description = "Application name (e.g., network, shared). Max 6 characters."
+  type        = string
+  default     = "database"
+
+  validation {
+    condition     = length(var.app) <= 10
+    error_message = "The app name must be less than or equal to 6 characters."
+  }
+}
+
+
+variable "env" {
+  description = "Environment code: 'd' (dev), 'p' (prod), 'q' (qa), 's' (stage), 'g' (global)."
+  type        = string
+  default     = "p"
+
+  validation {
+    condition     = contains(["d", "p", "q", "s", "g"], var.env)
+    error_message = "env must be one of 'd', 'p', 'q', 's', 'g'."
+  }
+}
+
+variable "team" {
+  description = "Team email responsible for the application (e.g., digitalops@gehealthcare.com)."
+  type        = string
+  default     = "infra"
+}
+
+variable "region" {
+  description = "AWS region (e.g., us-east-1, ap-south-1)."
+  type        = string
+  default     = "us-east-1"
+}
+##################### KMS #################################
+
+variable "enable_kms" {
+  description = "Enable KMS encryption and key creation"
+  type        = bool
+  default     = false
+}
+
+variable "alias_name" {
+  description = "Alias name for KMS key"
+  type        = string
+  default     = null
+}
+
+variable "kms_policy" {
+  description = "KMS policy"
+  type        = string
+  default     = null
+}
+
+variable "deletion_window_in_days" {
+  type    = number
+  default = 7
+}
+
+variable "is_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "enable_key_rotation" {
+  type    = bool
+  default = true
+}
+
