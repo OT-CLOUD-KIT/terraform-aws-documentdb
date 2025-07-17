@@ -46,7 +46,7 @@ module "documnetdb_security_group" {
 
 
 module "aws_documentdb_cluster" {
-  source                          = "../"
+  source                          = "git@github.com:OT-CLOUD-KIT/terraform-aws-documentdb.git?ref=Feature"
   
   # Basic Configuration
   cluster_identifier              = var.cluster_identifier

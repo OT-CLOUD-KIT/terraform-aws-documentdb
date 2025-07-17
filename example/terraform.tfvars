@@ -27,7 +27,6 @@ engine_version = "5.0.0"
 
 engine = "docdb"
 
-# storage_encrypted = false
 
 skip_final_snapshot = true
 
