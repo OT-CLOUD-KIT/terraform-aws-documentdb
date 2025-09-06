@@ -1,15 +1,9 @@
 locals {
-  base_name = "${var.env}-${var.bu}-${var.app}"
+  base_name = "${var.env}-${var.app}"
 
   common_tags = {
-    "BusinessUnit" = var.bu
-    "Program"      = var.program
-    "Application"  = var.app
-    "Environment"  = var.env
-    "Team"         = var.team
-    "Region"       = var.region
-    "ManagedBy"    = "Terraform"
+    env = var.env
+    owner =  var.owner
+    app = var.app
   }
-
 }
-

@@ -38,19 +38,9 @@ cluster_identifier = "proddocdb"
 
 deletion_protection= false
 
-env      = "d"
-bu       = "BP"
-app      = "db"
-program  = "OT"
-resource = "documentDB"
-team     = "devops"
-
-create                  = true
-random_alphanumeric_len = 2
-special                 = false
-upper                   = false
-number                  = true
-gen_no_of_names         = 1
+env = "dev"
+owner = "opstree"
+app = "otcloud-kit"
 
 
 enable_kms              = false
