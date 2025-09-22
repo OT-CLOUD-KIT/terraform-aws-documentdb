@@ -252,3 +252,55 @@ variable "enabled" {
   description = "Flag to control the documentDB creation."
 }
 
+
+variable "env" {
+  type = string
+  default = "dev"
+  
+}
+
+variable "owner" {
+  type = string
+  default = "opstree"
+}
+
+variable "app" {
+  type = string
+  default = "otcloud-kit"
+  
+}
+##################### KMS #################################
+
+variable "enable_kms" {
+  description = "Enable KMS encryption and key creation"
+  type        = bool
+  default     = false
+}
+
+variable "alias_name" {
+  description = "Alias name for KMS key"
+  type        = string
+  default     = null
+}
+
+variable "kms_policy" {
+  description = "KMS policy"
+  type        = string
+  default     = null
+}
+
+variable "deletion_window_in_days" {
+  type    = number
+  default = 7
+}
+
+variable "is_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "enable_key_rotation" {
+  type    = bool
+  default = true
+}
+

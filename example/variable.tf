@@ -110,14 +110,9 @@ variable "engine_version" {
 variable "storage_encrypted" {
   type        = bool
   description = "Specifies whether the DB cluster is encrypted"
-  default     = true
+  default     = false
 }
 
-variable "kms_key_id" {
-  type        = string
-  description = "The ARN for the KMS encryption key. When specifying `kms_key_id`, `storage_encrypted` needs to be set to `true`"
-  default     = ""
-}
 
 variable "skip_final_snapshot" {
   type        = bool
@@ -195,15 +190,44 @@ variable "deletion_protection" {
   default     = false
 }
 
+variable "env" {
+  type = string
+  default = "dev"
+  
+}
+
+variable "owner" {
+  type = string
+  default = "opstree"
+}
+
+variable "app" {
+  type = string
+  default = "otcloud-kit"
+  
+}
+
+variable "enable_kms" {
+  type = bool
+  default = false
+
+}
+
+variable "kms_key_id" {
+  type =  string
+  default = ""
+}
+
+
 variable "alias_name" {
-  description = "The name of the key alias"
-  type        = string
+  description = "the name of the key alias"
+  type = string
 }
 
 variable "deletion_window_in_days" {
   description = "The duration in days after which the key is deleted after destruction of the resource"
-  type        = string
-  default     = 30
+  type = string
+  default = 30
 }
 
 variable "is_enabled" {
@@ -219,7 +243,7 @@ variable "enable_key_rotation" {
 }
 
 variable "kms_policy" {
-  description = "The policy of the key usage"
+   description = "The policy of the key usage"
   type        = string
   default     = ""
 }

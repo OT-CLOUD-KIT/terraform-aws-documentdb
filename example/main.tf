@@ -1,24 +1,3 @@
-resource "aws_kms_key" "key" {
-  description             = "Key to encrypt and decrypt secret parameters"
-  key_usage               = "ENCRYPT_DECRYPT"
-  policy                  = var.kms_policy
-  deletion_window_in_days = var.deletion_window_in_days
-  is_enabled              = var.is_enabled
-  enable_key_rotation     = var.enable_key_rotation
-
-  tags = merge(
-    {
-      "Name" = var.alias_name
-    },
-    var.tags,
-  )
-}
-
-resource "aws_kms_alias" "key_alias" {
-  name          = "alias/${var.alias_name}"
-  target_key_id = aws_kms_key.key.id
-}
-
 
 module "documnetdb_security_group" {
   source                             = "OT-CLOUD-KIT/security-groups/aws"
@@ -46,9 +25,8 @@ module "documnetdb_security_group" {
 }
 
 
-
 module "aws_documentdb_cluster" {
-  source                          = "../../"
+  source                          = "git@github.com:OT-CLOUD-KIT/terraform-aws-documentdb.git?ref=Feature"
   
   # Basic Configuration
   cluster_identifier              = var.cluster_identifier
@@ -61,6 +39,9 @@ module "aws_documentdb_cluster" {
   # Authentication
   master_username                 = var.master_username
   master_password                 = var.master_password
+ env = var.env
+ owner = var.owner
+ app = var.app
 
   # Network Configuration
   vpc_id                          = var.vpc_id
@@ -68,6 +49,8 @@ module "aws_documentdb_cluster" {
   vpc_cidr_block                  = var.vpc_cidr_block
   vpc_security_group_ids          = [module.documnetdb_security_group.sg_id]
 
+  kms_key_id             = var.kms_key_id != null ? var.kms_key_id : null
+  storage_encrypted               = var.enable_kms
   # Maintenance and Backup
   apply_immediately               = var.apply_immediately
   snapshot_identifier             = var.snapshot_identifier
@@ -75,16 +58,19 @@ module "aws_documentdb_cluster" {
   auto_minor_version_upgrade      = var.auto_minor_version_upgrade
   preferred_backup_window         = var.preferred_backup_window
   preferred_maintenance_window    = var.preferred_maintenance_window
-
+  alias_name =  var.alias_name
+  deletion_window_in_days = var.deletion_window_in_days
+  is_enabled = var.is_enabled
+  enable_key_rotation = var.enable_key_rotation
+  kms_policy = var.kms_policy
   # Additional Configuration
   cluster_parameters              = var.cluster_parameters
   cluster_family                  = var.cluster_family
-  storage_encrypted               = var.storage_encrypted
-  kms_key_id                      = aws_kms_key.key.id
   skip_final_snapshot             = var.skip_final_snapshot
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
   ssm_parameter_enabled           = var.ssm_parameter_enabled
   deletion_protection             = var.deletion_protection
-  tags                            = var.tags
+
+
 }
 
